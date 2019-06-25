@@ -1,0 +1,55 @@
+<ion-header no-border no-shadow>
+  <ion-navbar no-border no-shadow hideBackButton>
+    <ion-row>
+      <ion-col>
+        <button style="background-color: transparent !important;border-radius: 0px !important; box-shadow: none !important;" ion-button navPop icon-only>
+          <ion-icon name="appname-back"></ion-icon>
+		    </button>
+      </ion-col>
+      <ion-col>
+        <ion-title text-center>
+          <img class="header" style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+        </ion-title>
+      </ion-col>
+      <ion-col (click)="editarPerfil()">
+        <ion-buttons end>
+          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg(imgSrc)">
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card style="margin-top:0px; margin-bottom: 0px;">
+    <ion-card-header text-center>
+      {{nombreLocal}}
+    </ion-card-header>
+    <ion-card-content>
+      <img style="border-radius: 15px;" src="{{url+info.foto}}">
+      <ion-row justify-contetn-center>
+        <ion-item style="border-bottom: 1.5px solid #d7d7d7;">
+          <h4 class="title" text-center>{{info.nombre}}</h4>
+          <h6 class="fecha" text-center>{{dia(info.fechaevento)}}</h6>
+        </ion-item>
+        <ion-item>
+          <h6 *ngIf="(info.precio == 0)" text-center style="font-size: 1.6rem; color: #ababab;">Evento Gratis</h6>
+          <h6 *ngIf="!(info.precio == 0)" text-center style="font-size: 1.6rem; color: #ababab;">${{info.precio}}</h6>
+        </ion-item>
+      </ion-row>
+      <ion-row *ngIf="validarBtn(info)" justify-contetn-center>
+        <button *ngIf="!(0 == info.precio)" (click)="checkout()" style="height: 50px; background-color: #51bf5c; text-transform: none;" ion-button full round icon-start>
+          <ion-icon name="card"></ion-icon>
+          Pagar
+        </button>
+        <button (click)="goToReserva()" style="margin-top:10px; height: 50px; background-color: #ababab; text-transform: none;" ion-button full round>Reservar</button>
+        <ion-item *ngIf="!(0 == info.precio)">
+          <p text-center style="font-size: 1.1rem;">La simple reserva no asegura el ingreso ni el precio</p>
+        </ion-item>
+        <ion-item>
+          <h6 text-center text-wrap>{{info.direccion}}</h6>
+        </ion-item>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

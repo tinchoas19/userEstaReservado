@@ -1,0 +1,40 @@
+<ion-header no-border no-shadow>
+  <ion-navbar no-border no-shadow hideBackButton>
+    <ion-row>
+      <ion-col>
+        <button style="background-color: transparent !important;border-radius: 0px !important; box-shadow: none !important;" ion-button navPop icon-only>
+          <ion-icon name="appname-back"></ion-icon>
+		    </button>
+      </ion-col>
+      <ion-col>
+        <ion-title text-center>
+          <img style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+        </ion-title>
+      </ion-col>
+      <ion-col (click)="editarPerfil()">
+        <ion-buttons end>
+          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg(imgSrc)">
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="header-image">
+    QR
+  </div>
+  <ion-row justify-content-center>
+    <ion-card *ngIf="createdCode">
+      <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+      <ion-card-content>
+        <ion-row justify-content-center>
+          <p text-center>{{reservaInfo.nombre}}</p>
+        </ion-row>
+        <ion-row justify-content-center>
+          <p text-center>{{reservaInfo.fechaevento | date :  "dd/MM/y" }}</p>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-content>

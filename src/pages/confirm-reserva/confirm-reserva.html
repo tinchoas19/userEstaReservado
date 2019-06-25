@@ -1,0 +1,36 @@
+<ion-header no-border no-shadow>
+  <ion-navbar no-border no-shadow hideBackButton>
+    <ion-row>
+      <ion-col>
+        <button style="background-color: transparent !important;border-radius: 0px !important; box-shadow: none !important;" ion-button navPop icon-only>
+          <ion-icon name="appname-back"></ion-icon>
+		    </button>
+      </ion-col>
+      <ion-col>
+        <ion-title text-center>
+          <img class="header" style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+        </ion-title>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf=info>
+  <ion-grid>
+    <ion-row>
+      <ion-col style="text-align: center; margin: 10px;">
+        <img class="fotoEvento" src="{{url+info.foto}}">
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <h6 text-center style="margin-top: 0.5rem !important;">{{info.nombre}}</h6>
+    </ion-row>
+    <ion-row justify-content-center>
+      <button style="background-color:#2896a7 !important; height: 45px; margin: 10px;" (click)="crearReserva()" ion-button full round>Confirmar Reserva</button>
+    </ion-row>
+    <ion-row justify-content-center>
+      <p *ngIf="!(info.precio == 0)" style="color: #656565;" padding text-center text-wrap>La reserva no asegura el lugar hasta que el pago no sea realizado</p>
+    </ion-row>
+  </ion-grid>
+</ion-content>

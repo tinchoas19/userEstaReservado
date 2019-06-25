@@ -1,0 +1,51 @@
+page-int-evento {
+  ion-content{
+    background-color: #eff4f0 !important; 
+  }
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+      }
+      ion-col.col{
+        padding: 0px !important;
+      }
+        .card-background-page {
+            ion-card {
+              position: relative;
+              text-align: center;
+            }
+            .card-title {
+              position: absolute;
+              top: 36%;
+              font-size: 2.0em;
+              width: 100%;
+              font-weight: bold;
+              color: #fff;
+            }
+        }
+        .imgPerfil{
+          border-radius: 50%;
+      }
+    .card-header{
+      padding-bottom: 5px;
+      padding-top: 5px;
+      font-size: 2.6rem;
+      color: #6f6f6f;
+    }
+
+    h4.title{
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+    h6.fecha{
+      font-size: 1.6rem;
+      font-weight: 100;
+    }
+    p{
+      text-align: center;
+    }
+    .label{
+      margin: 0px !important;
+    }
+}

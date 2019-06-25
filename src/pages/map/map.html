@@ -1,0 +1,32 @@
+<!-- <ion-header transparent no-border no-shadow>
+  <ion-navbar transparent no-border no-shadow>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content style = "width: 100%; height: 100%;">
+  <div #map id="map">
+  </div>
+  <div class="slider-wraper" style="width: 100% !important;">
+    <ion-slides style="width: 100% !important;" slidesPerView="1.2" (ionSlideDidChange)="slideChanged()">
+      <ion-slide *ngFor="let bol of boliches" style="width: auto !important;">
+        <ion-card class="slide-bol">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img class="firstImg" src="{{url+bol.foto}}"/>
+            </ion-thumbnail>
+            <ion-icon name="navigate" item-end (click)="goToLocal(bol)"></ion-icon>
+            <h2>
+              {{bol.nombre}}
+            </h2>
+            <p style="font-size: 0.7em;">
+              <ion-icon name="pin"></ion-icon>  {{bol.direccion}}
+            </p>
+            <p style="font-size: 0.7em;" text-wrap>
+              <ion-icon name="pin"></ion-icon> Estas a {{bol.distance}} - {{bol.duration}}
+            </p>
+          </ion-item>
+        </ion-card>          
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

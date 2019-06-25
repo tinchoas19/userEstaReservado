@@ -1,0 +1,70 @@
+page-map {
+    #map{
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+        transition: opacity 150ms ease-in;
+        display: block;
+        &.show-map{
+            opacity: 1;
+        }
+        div div div a div{
+            display: none !important;
+        }
+    }
+    div{
+        img{
+        border-radius: 10px !important;
+        }
+    }
+    .gmnoprint.gm-style-cc{
+        display: none !important;
+    }
+    .gm-style-cc{
+        display: none !important; 
+    }
+    .gmnoprint{
+        display: none !important;
+    }
+    #text{
+        margin: 3px 0 !important;
+        width: 50%;
+        float: left;
+    }
+    #imageInfo{
+        img{
+            margin: 3px 0 !important;
+            width: 50% !important;
+            //float: right;
+        }
+    }
+    .slider-wraper{
+        width: auto;
+        position: absolute;
+        bottom: 0;
+        width: 325px !important;
+        ion-card.card{
+            border-radius: 20px !important;
+            width: calc(100% - 5px) !important;
+            ion-item.item{
+                padding-left: 5px !important;
+                width: 100% !important;
+            }
+            img.firstImg{
+                border-radius: 10px !important;                
+                background-size: cover;
+            }
+        }
+    }
+    .card.slide-bol{
+        margin: 10px 0px 10px 5px !important;
+        width: 100% !important;
+    }
+
+    .swiper-container.swiper-container-horizontal.swiper-container-android{
+        width: 100% !important;
+    }
+    .swiper-wrapper{
+        width: 100% !important;        
+    }
+}

@@ -1,0 +1,102 @@
+page-home {
+    ion-content{
+        background-color: #eff4f0 !important; 
+    }
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+    }
+    .imgPerfil{
+        border-radius: 50%;
+    }
+    ion-col.col{
+        padding: 0px !important;
+    }
+    .header-image {
+        box-sizing: border-box;
+        padding: 5px;
+        background-attachment: fixed;
+        position: relative;
+        font-size: 1.2em;
+        color: white;
+        height: auto;
+        text-align: center;
+        width: 100% !important;
+    }
+    input.searchbar-input{
+        box-shadow: -5px 8px 9px 0px rgba(140,140,140,0.51) !important;
+        color: #908f8f !important;
+        border-radius: 10px !important;
+        font-size: 1.5rem !important;
+        height: 40px !important;
+    }
+    .searchbar-search-icon{
+        top: 5px !important;
+    }
+    ion-card.card{
+        box-shadow: 1px 4px 5px 0px rgba(140,140,140,0.51);
+        border-radius: 30px !important;
+        .card-title{
+            padding: 0 !important;
+        }
+        .tienda-bg{
+            display: flex;
+            overflow: hidden;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            img.firstImg{
+                width: 100%;
+                display: flex;
+                align-self: center;
+            }
+        }
+    }
+    ion-badge.badge{
+        background-color: #ffffff !important;
+        border-radius: 10px !important;
+        color: #9599ad;
+        width: auto;
+        border: 1px solid #E7E7E7;
+    }
+    .item ion-thumbnail ion-img {
+        background-color: #e0e0e0 !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 20px !important;
+        background-size: cover;
+        background-position: center;
+    }
+    ion-img .img-unloaded{
+        border-radius: 20px !important;
+    }
+    .item{
+        background-color: transparent !important;
+        //border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+        margin-top: -30px !important;
+    }
+    .item ion-thumbnail {
+        background-color: #e0e0e0 !important;
+        border-radius: 20px !important; 
+        min-width: 60px;
+        min-height: 60px;
+    }
+    .label{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        height: 60px;
+    }
+    .item-description{
+        font-size: 0.7em;
+        margin-top: 5px; 
+        color: black;
+    }
+    .input-wrapper{
+        border-bottom-width: 1px solid #666;
+    }
+    .custom-popover {
+        width: 30%;
+    }
+}

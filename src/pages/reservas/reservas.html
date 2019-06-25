@@ -1,0 +1,79 @@
+<ion-header no-border no-shadow>
+  <ion-navbar no-border no-shadow>
+    <ion-title text-center>Mis reservas</ion-title>
+  </ion-navbar>
+  <ion-toolbar class="segment" no-border-top>
+    <ion-segment [(ngModel)]="historicos">
+      <ion-segment-button value="vigentes">
+        Vigentes
+      </ion-segment-button>
+      <ion-segment-button value="historics">
+        Anteriores
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div [ngSwitch]="historicos">
+    <div *ngSwitchCase="'vigentes'">
+      <ion-row *ngIf="reservasVigentes.length == 0" justify-content-center>
+        <p style="color: #656565;" padding text-center text-wrap>No hay reservas relizadas por el momento.</p>
+      </ion-row>
+      <div *ngIf="!(reservasVigentes.length == 0)">
+        <ion-list *ngFor="let reserva of listaFechasVigentes">
+          <ion-row *ngIf="!mostrarmsj1">
+            <ion-list-header text-center style="margin-bottom: 0px !important;">
+              {{dia(reserva.fecha)}} {{mostrarDia(reserva.fecha)}}
+            </ion-list-header>
+            <ion-item *ngFor="let res of reserva.listaEventos" (click)="createCode(res.reservaid, res)">
+                <ion-thumbnail item-start>
+                    <img src="{{url+res.foto}}">
+                  </ion-thumbnail>
+              <ion-row>
+                <ion-col>
+                  <div>{{res.nombrelugar}}</div>
+                  <ion-badge color="badge">{{mostrarDia(res.fechaevento)}}</ion-badge>
+                  <p style="color: #656565; font-size: 0.75em;">Ingresá con tu código QR</p>
+                </ion-col>
+                <ion-col style="text-align: center;">
+                  <button ion-button outline color="{{res.btnColor}}">{{res.nameBtn}}</button>
+                  <!-- <ion-icon name="calendar"></ion-icon>  <ion-icon *ngIf="mostrarIcon(reserva.estapago)" name="logo-pinterest" item-end></ion-icon> -->
+                </ion-col> 
+              </ion-row>
+            </ion-item> 
+          </ion-row>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngSwitchCase="'historics'">
+      <ion-row *ngIf="reservasAnteriores.length == 0" justify-content-center>
+        <p style="color: #656565;" padding text-center text-wrap>No hay reservas relizadas por el momento.</p>
+      </ion-row>
+      <div *ngIf="!(reservasAnteriores.length == 0)">
+        <ion-list *ngFor="let reserva of listaFechasAnteriores">
+          <ion-row *ngIf="!mostrarmsj">
+          <ion-list-header text-center style="margin-bottom: 0px !important;">
+            {{dia(reserva.fecha)}} {{mostrarDia(reserva.fecha)}}
+          </ion-list-header>
+            <ion-item *ngFor="let res of reserva.listaEventos" (click)="internaEvento(res)">
+              <ion-thumbnail item-start>
+                <img src="{{url+res.foto}}">
+              </ion-thumbnail>
+              <ion-row>
+                <ion-col>
+                  <div>{{res.nombrelugar}}</div>
+                  <ion-badge color="badge">{{mostrarDia(res.fechaevento)}}</ion-badge>
+                </ion-col>
+                <ion-col style="text-align: center;">
+                  <button ion-button outline color="{{res.btnColor}}">{{res.nameBtn}}</button>
+                </ion-col> 
+              </ion-row>
+            </ion-item> 
+          </ion-row>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+page-qr-data {
+    ion-content{
+        background-color: #eff4f0 !important; 
+    }
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+    }
+    .imgPerfil{
+        border-radius: 50%;
+    }
+    ion-col.col{
+        padding: 0px !important;
+    }
+    .header-image {
+        box-sizing: border-box;
+        padding: 15px;
+        //margin-bottom: 30px !important;
+        background-attachment: fixed;
+        position: relative;
+        font-size: 1.2em;
+        color: white;
+        //height: 40px;
+        text-align: center;
+        width: 100% !important;
+        background-color: #003873;
+    }
+}

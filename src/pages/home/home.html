@@ -1,0 +1,59 @@
+<ion-header no-shadow>
+  <ion-navbar no-border hideBackButton>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col (click)="pageScroller()">
+        <ion-title text-center>
+          <img style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+        </ion-title>
+      </ion-col>
+      <ion-col (click)="editarPerfil()">
+        <ion-buttons end>
+          <!-- <img *ngIf="foto_perfil" class="imgPerfil" style="max-width: 40% !important;" [src]="imgSrc"> -->          
+          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg()">
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content parallax-header has-bouncing="true" #pageTop>
+  <div class="header-image">
+    <ion-searchbar
+      placeholder="Busca tu mejor lugar"
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+  </div>
+
+  <div class="main-content">
+    <ion-list style="margin-top: 10px !important;" >
+      <ion-card (click)=goToIntLocal(local) *ngFor="let local of localesPrev2">
+        <div class="tienda-bg">
+          <img class="firstImg" src="{{url+local.foto}}"/>
+        </div>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{url+local.foto}}">
+          </ion-avatar>
+          <ion-badge item-end>
+            {{local.hora_apertura}}
+          </ion-badge>
+        </ion-item>
+        <ion-card-content>
+          <ion-card-title>
+            {{local.nombre}}
+            </ion-card-title>
+          <p>
+            <ion-icon name="pin"></ion-icon>  {{local.direccion}}
+          </p>
+          <p>
+            <ion-icon name="car"></ion-icon> Estas a {{local.distance}} - {{local.duration}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
+</ion-content>

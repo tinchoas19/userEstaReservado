@@ -1,0 +1,70 @@
+page-change-pass {
+    ion-content{
+        background-image: url("../../assets/imgs/2-registrar/bg.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    img {
+        width: 50%;
+        height: auto;
+        margin: 0px auto;
+    }
+    #cloud-layer {
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+    }
+    ion-icon {
+        &[class*="appname-"] {
+            mask-size: contain;
+            mask-position: 50% 50%;
+            mask-repeat: no-repeat;
+            background: currentColor;
+            color: white;
+            width: 1.5em;
+            height: 1.5em;
+        }
+        // custom icons
+        &[class*="appname-username"] {
+            mask-image: url("../../assets/imgs/1-login/user.png");
+        }
+    }
+    .placeholder-text{
+        color: #f4f4f4 !important;
+        font-size: 0.8em;
+        opacity: 1;
+    }
+    ion-row {
+        align-items: center;
+        text-align: center;
+    }
+    ion-item{
+        height: 40px !important;
+        border-radius: 30px !important;
+        margin-bottom: 10px !important;
+        background-color: transparent !important;
+        opacity: 1;
+    }
+    div.item-inner{
+        border-radius: 20px !important;
+        //border: 1px solid white;
+        background-color: #56a0b9 !important;
+        border-bottom: none !important;
+    }
+    .list .item-input:last-child{
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    .submit-btn {
+        width: 80%;
+        margin: 0 auto;
+        font-size: 0.7em;
+        border-radius: 30px !important;
+        background-color: transparent !important;
+        border: 1px solid white !important;
+        color: white !important;
+    }
+}

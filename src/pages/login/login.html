@@ -1,0 +1,45 @@
+<ion-content no-padding>
+  <ion-list style="margin-top: 5%;" id="cloud-layer">
+    <ion-row>
+      <ion-col>
+        <img src="../../assets/imgs/1-login/logo1.png"/>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 5%;">
+      <ion-col>
+        <ion-item>
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input class="placeholder-text" placeholder="Usuario (e-mail)" type="email" required [(ngModel)]=user.usuario></ion-input>
+        </ion-item>    
+        <ion-item>
+          <ion-label><ion-icon name="appname-password"></ion-icon></ion-label>
+          <ion-input class="placeholder-text" placeholder="Contraseña" type="password" required [(ngModel)]=user.password></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 5%;">
+      <ion-col>
+        <button ion-button class="submit-btn" full outline (click)="login()">Ingresar</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>  
+      <ion-col>
+        <button ion-button class="submit-btnFB" full (click)="loginAction()">Iniciar Sesion con Facebook</button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 5%;">
+      <ion-col>
+        <p text-center style="margin-bottom: 0px !important; font-size: 0.9em; text-transform: uppercase; color: white !important;" (click)="crearCuenta()">Registrarme</p>
+      </ion-col>
+    </ion-row>
+    <ion-row no-margin no-padding justify-content-center>
+      <p no-margin text-center style="margin-top: 5px; font-size: 0.9em; text-transform: uppercase; color: white !important;" (click)="recuperarPass()">¿Olvidaste tu contraseña?</p>
+    </ion-row>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row style="bottom: 0px !important;" justify-content-center>
+    <p text-center text-wrap style="color: darkgray; padding: 0 32px;">Al continuar aceptás nuestros Términos de servicio y Políticas de Privacidad. No publicaremos nada en Facebook sin autorización</p>
+  </ion-row>
+</ion-footer>
+

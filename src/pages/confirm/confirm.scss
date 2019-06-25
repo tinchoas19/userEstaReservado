@@ -1,0 +1,17 @@
+page-confirm {
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+    }
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    ion-content{
+        background-image: url("http://estareservado.ctrlztest.com.ar/imgApp_Reservo/splash.png");
+        background-size: cover;
+        background-position: center;
+    }
+}

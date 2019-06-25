@@ -1,0 +1,99 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face{
+    font-family: Embed;
+    src: url('../assets/fonts/embed.woff2');
+}
+
+*{
+    font-family: Embed;
+}
+
+ion-navbar.toolbar{
+    padding-top: 8% !important;
+    height: 12.8vh !important;
+}
+
+ion-icon {
+    &[class*="appname-"] {
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        color: white;
+        width: 1.5em;
+        height: 1.5em;
+    }
+    // custom icons
+    &[class*="appname-username"] {
+        mask-image: url("../assets/imgs/1-login/user.png");
+    }
+    &[class*="appname-password"] {
+        mask-image: url("../assets/imgs/1-login/pass.png");
+    }
+    &[class*="appname-back"] {
+        mask-image: url("../assets/imgs/atras.png");
+    }
+}
+
+ion-icon {
+    &[class*="mascotas-"] {
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        color: white;
+        width: 2.5em;
+        height: 1.5em;
+    }
+    &[class*="mascotas-luagres"] {
+        mask-image: url("../assets/imgs/icon/lugares-icono.png");
+    }
+    &[class*="mascotas-mapa"] {
+        mask-image: url("../assets/imgs/icon/mapa-icono.png");
+    }
+    &[class*="mascotas-reservas"] {
+        mask-image: url("../assets/imgs/icon/reservas-icono.png");
+    }
+}
+
+.toastExito{
+    width: 90%;
+    margin-top: 20% !important;
+    margin: 5%;
+    //padding: 15px;
+.toast-wrapper {
+    background: #21c064;  
+  }
+  .toast-message {   
+    color: white;
+    white-space: pre-line;
+    }  
+}
+.toastError{
+    width: 90%;
+    margin-top: 20% !important;
+    margin: 5%;
+    //padding: 15px;
+    .toast-wrapper {
+        background: #e0483d;       
+      }
+      .toast-message {       
+        color: white;
+        white-space: pre-line;
+    }  
+}

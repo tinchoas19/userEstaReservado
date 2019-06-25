@@ -1,0 +1,76 @@
+page-reservas {
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+        ion-toolbar.segment.toolbar{
+            min-height: 43px !important;
+            padding: 0px !important;
+            .toolbar-background{
+                background: #003873 !important;
+                min-height: 43px !important;
+            }
+        }
+    }
+    .scroll-content{
+        background-color: #FFFFFF !important;
+    }
+    .item{
+        background-color: transparent !important;
+        margin-top: 0 !important;
+    }
+    .segment-button{
+        color: white !important;
+    }
+    .segment-button.segment-activated {
+        border-color: #0085ad !important;
+    }
+    ion-list{
+        //margin: 5% 0 16px !important;
+        width: 100%;
+    }
+    .item{
+        background-color: #ffffff !important;
+        margin-top: 4%; 
+    }
+    .item-inner{
+        border-bottom: none !important;
+    }
+    img.list{
+        border-radius: 20px;
+        box-shadow: 0px 0px 8px 3px rgba(140,140,140,0.51);
+    }
+    .item ion-thumbnail {
+        box-shadow: 0px 0px 8px 3px rgba(140,140,140,0.51);        
+        background-color: #e0e0e0 !important;
+        border-radius: 20px !important;
+        min-width: 70px !important;
+        min-height: 70px !important; 
+    }
+    .item ion-thumbnail img{
+        border-radius: 20px !important;        
+        width: 70px !important;
+        height: 70px !important;
+    }
+    ion-label.label{
+        height: 100%;
+        margin-top: 15px;
+    }
+    .label{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        height: 60px;
+    }
+    ion-badge.badge{
+        border-radius: 10px !important;
+        padding: 5px 3px 3px 3px !important;
+        font-size: 1.1rem !important;
+        font-weight: 300 !important;
+    }
+    button.button{
+        font-size: 0.9rem !important;
+        border-radius: 2px !important;
+        height: 1.5rem !important;
+    }
+}

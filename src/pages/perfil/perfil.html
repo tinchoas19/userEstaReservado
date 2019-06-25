@@ -1,0 +1,79 @@
+<ion-header no-shadow no-border transparent>
+  <ion-navbar no-shadow no-border transparent>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row style="margin-top: 7%;" justify-content-center>
+    <ion-col text-center col-6 no-padding>
+      <img *ngIf="cambioBtn2" text-center class="img_add" [src]="imgSrc">
+      <img *ngIf="!cambioBtn2" text-center class="img_add" [src]="getTrustImg(imagePath)">
+    </ion-col>
+    <ion-col col-6 no-padding>
+      <h4>{{userName}} {{apellido}}</h4>
+      <p>{{userEmail}}</p>
+    </ion-col>
+    <ion-col col-6 text-center no-padding class="col_add">
+      <span text-center><ion-icon ion-fab mini class="icon_add" name="add" (click)="addPerfilPhoto()"></ion-icon></span>
+    </ion-col>
+  </ion-row>
+  <ion-list id="cloud-lay" padding>
+    <ion-row style="height: 64%;">
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Nombre" type="text" required [(ngModel)]="user.nombre" (ionChange)="changeName($event)"></ion-input>
+        </ion-item>    
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Apellido" type="text" required [(ngModel)]="user.apellido" (ionChange)="changeLastName($event)"></ion-input>
+        </ion-item>
+        <form style="width: 100%!important;" [formGroup]="formMail" novalidate>
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-email"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Email" formControlName="clientEmail" name="email" type="email" [(ngModel)]="user.email" (ionChange)="changeEmail($event)"></ion-input>
+        </ion-item>
+        </form>    
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-tel"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Teléfono" type="number" required [(ngModel)]="user.telefono"></ion-input>
+        </ion-item>
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-dni"></ion-icon></ion-label>
+          <ion-input text-right placeholder="D.N.I" type="number" required [(ngModel)]="user.dni"></ion-input>
+        </ion-item>
+        <ion-item class="item_perfil">
+          <ion-label style="color: white;"><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-datetime placeholder="Fecha de nacimiento" displayFormat="DD/MM/YYYY" cancelText="Cancelar" doneText="Ok" [(ngModel)]="user.nacimiento"></ion-datetime>
+        </ion-item>
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Contraseña" type="password" required [(ngModel)]="user.pass"></ion-input>
+        </ion-item>
+        <ion-item class="item_perfil">
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input text-right placeholder="Repetir contraseña" type="password" required [(ngModel)]="user.repetirPass"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row *ngIf="!cambioBtn3" padding justify-content-center>
+        <ion-item style="padding-left: 50px !important; text-align: start;" no-lines>
+          <ion-label text-wrap style="font-size: 0.8em; color: #FFFFFF;">Acepto <a (click)="goToTerminos()">Términos y condiciones</a> de EstáReservado</ion-label>
+          <ion-checkbox style="margin: 9px !important;" color="secondary" (ionChange)="selected($event)"></ion-checkbox>
+        </ion-item>
+      </ion-row>
+      <ion-row *ngIf="cambioBtn1" justify-content-center style="margin-top:5%;">
+        <button class="continuar" style="font-size: 0.8em;" ion-button full round outline [disabled]="!formMail.valid && !checkTerminos" (click)="savePerfil()">Continuar</button>
+      </ion-row>
+      <ion-row *ngIf="cambioBtn2" justify-content-center style="margin-top:5%;">
+        <button class="continuar" style="font-size: 0.8em;" ion-button full round outline [disabled]="!formMail.valid && !checkTerminos" (click)="sevePerfilconFb()">Continuar</button>
+      </ion-row>
+      <ion-row *ngIf="cambioBtn3" justify-content-center style="margin-top:5%;">
+        <button class="continuar" style="font-size: 0.8em;" ion-button full round outline [disabled]="!formMail.valid" (click)="actualizarUser()">Guardar Cambios</button>
+      </ion-row>
+    </ion-list>
+    <!-- <ion-row justify-content-center>
+      <p text-center class="perfil-ft" (click)="goToTerminos()">Términos y Condiciones</p>
+    </ion-row> -->
+    <ion-row justify-content-center (click)="logOut()">
+      <p text-center class="perfil-ft" >Salir <span><ion-icon name="power"></ion-icon></span></p>
+    </ion-row>
+  </ion-content>
+

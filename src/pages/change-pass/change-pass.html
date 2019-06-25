@@ -1,0 +1,26 @@
+<ion-header no-shadow no-border transparent>
+  <ion-navbar no-shadow no-border transparent>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list id="cloud-layer">
+    <ion-row>
+      <ion-col>
+        <img src="../../assets/imgs/1-login/logo1.png"/>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 10%;">
+      <ion-col>
+        <ion-item>
+          <ion-label><ion-icon name="appname-username"></ion-icon></ion-label>
+          <ion-input class="placeholder-text" placeholder="Ingesá tu email" type="email" required [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <ion-row style="margin-top:20px;">
+          <ion-col>
+            <button ion-button class="submit-btn" full outline (click)="recuperarPass(email)">Enviar</button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>

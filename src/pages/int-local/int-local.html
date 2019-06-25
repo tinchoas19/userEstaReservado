@@ -1,0 +1,76 @@
+<ion-header no-border no-shadow>
+  <ion-navbar no-border no-shadow hideBackButton>
+    <ion-row>
+      <ion-col>
+        <button style="background-color: transparent !important;border-radius: 0px !important; box-shadow: none !important;" ion-button navPop icon-only>
+          <ion-icon name="appname-back"></ion-icon>
+		    </button>
+      </ion-col>
+      <ion-col>
+        <ion-title text-center>
+          <img style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+        </ion-title>
+      </ion-col>
+      <ion-col (click)="editarPerfil()">
+        <ion-buttons end>
+          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg(imgSrc)">
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card style="width: 100% !important; margin: 0px !important;">
+    <div class="tienda-bg">
+      <img src="{{url+info.foto}}"/>
+    </div>
+    <ion-item no-lines>
+      <ion-icon color="colorIcon" item-start name="pin"></ion-icon> Distancia: {{info.distance}}
+    </ion-item>
+    <ion-item (click)="expandItem(info.horarios)"> 
+      <ion-icon color="colorIcon" item-start name="alarm"></ion-icon>
+      <span>Ver Horarios</span>
+      <ion-icon color="colorIcon" item-end [name]="'arrow-dropdown'"></ion-icon>
+    </ion-item>
+  </ion-card>
+  <ion-card style="margin: 10px !important;" *ngIf="!expanded">
+    <ion-card-header text-center>
+      Horarios
+    </ion-card-header>
+    <ion-card-content>
+      <p padding *ngIf="data" text-center>Sin horarios agregados!</p>
+      <ion-list *ngIf="!data">
+        <ion-row *ngFor="let hora of horarios">
+          <ion-col col-4>
+            <p text-center>{{hora.dia}}</p>
+          </ion-col>
+          <ion-col col-8>
+            <p text-right>{{hora.desde}} - {{hora.hasta}}</p> 
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card style="margin: 10px !important;">
+    <ion-card-header>
+      <p text-center text-wrap>{{info.descripcion}}</p>
+    </ion-card-header>
+    <ion-card-content>
+      <button (click)="goToEvents()" style="background-color: #0173b1; height: 40px;" ion-button full round>Eventos</button>
+    </ion-card-content>
+  </ion-card>
+  <ion-row justify-content-center>
+    <ion-item no-lines>
+      <p text-wrap text-center>
+        <ion-icon color="colorIcon" item-start name="pin"></ion-icon> {{info.direccion}}
+      </p>
+    </ion-item>
+  </ion-row>
+  <ion-row style = "width: 100%; height: 50%;">
+    <div #map id="map"></div>
+  </ion-row>
+</ion-content>
+

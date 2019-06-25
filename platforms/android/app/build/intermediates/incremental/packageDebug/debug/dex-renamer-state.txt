@@ -1,0 +1,4 @@
+#Wed Jun 19 17:58:46 ART 2019
+base.0=/home/rodrigo/tutorialIonic/EstaReservado/userReservado/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

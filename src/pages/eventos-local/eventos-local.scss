@@ -1,0 +1,77 @@
+page-eventos-local {
+    ion-content{
+        background-color: #FFFFFF !important; 
+    }
+    ion-header {
+        .toolbar-background {
+            background: linear-gradient(to bottom, #259ea6, #386fad);
+        }
+    }
+    ion-col.col{
+        padding: 0px !important;
+    }
+    .header-image {
+        box-sizing: border-box;
+        padding: 10px;
+        //margin-bottom: 10px !important;
+        background-attachment: fixed;
+        position: relative;
+        font-size: 1.2em;
+        color: white;
+        height: 40px;
+        text-align: center;
+        width: 100% !important;
+        background-color: #009cab;
+    }
+    .imgPerfil{
+        border-radius: 50%;
+    }
+    ion-list{
+        width: 100%;
+    }
+    .item{
+        background-color: #ffffff !important;
+    }
+    img.list{
+        border-radius: 20px;
+        box-shadow: 0px 0px 8px 3px rgba(140,140,140,0.51);
+    }
+    .item ion-thumbnail {
+        background-color: #e0e0e0 !important;
+        border-radius: 20px !important;
+        min-width: 70px !important;
+        min-height: 70px !important; 
+    }
+    .item ion-thumbnail img{        
+        width: 70px !important;
+        height: 70px !important;
+    }
+    ion-label.label{
+        height: 100%;
+        margin-top: 15px;
+    }
+    .label{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        height: 60px;
+    }
+    .item-description{
+        font-size: 0.7em;
+        margin-top: 15px; 
+        color: black;
+    }
+    .input-wrapper{
+        border-bottom-width: 1px solid #666;
+    }
+    .custom-popover {
+        width: 30%;
+    }
+    div.datetime-text.datetime-placeholder{
+        color: white !important;
+    }
+    .disabled {
+        pointer-events:none; //This makes it not clickable
+        opacity:0.6;         //This grays it out to look disabled
+    }
+}

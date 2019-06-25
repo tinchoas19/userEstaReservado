@@ -1,0 +1,13 @@
+<ion-content>
+  <p padding *ngIf="data" text-center>Sin horarios agregados!</p>
+  <ion-list *ngIf="!data">
+    <ion-row *ngFor="let hora of horarios">
+      <ion-col col-4>
+        {{hora.dia}}
+      </ion-col>
+      <ion-col col-8>
+        {{hora.desde}} - {{hora.hasta}} 
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>
