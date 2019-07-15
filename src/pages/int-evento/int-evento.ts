@@ -13,7 +13,7 @@ import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser"
 export class IntEventoPage {
   private win: any = window;
   options: InAppBrowserOptions = {
-    location: "no", //Or 'no'
+    location: "yes", //Or 'no'
     hidden: "yes", //Or  'yes'
     clearcache: "yes",
     clearsessioncache: "yes",
@@ -203,7 +203,7 @@ export class IntEventoPage {
 
      let target = "_blank";
      console.log('URL_MP', this.urlMP);
-     this.iab.create(this.urlMP,'_blank',{location:'no'});
+     this.iab.create(this.urlMP,'_blank',this.options);
  }
 
 }
