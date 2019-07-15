@@ -231,7 +231,7 @@ export class ServicesProvider {
     )
   }
 
-  crearReserva(userId, eventoId){
+  crearReserva(userId, eventoId,pago){
     let url = "http://estareservado.ctrlztest.com.ar/crearreserva.php";
     
     var headers = new Headers();
@@ -242,6 +242,7 @@ export class ServicesProvider {
     const body = JSON.stringify({
       usuarioid: userId,
       eventoid: eventoId,
+      pago: pago
     })
 
     console.log('body', body);

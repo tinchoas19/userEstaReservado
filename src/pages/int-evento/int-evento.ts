@@ -209,7 +209,7 @@ export class IntEventoPage {
       var okUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/thankyou.php';
       if (event.url == okUrl) {
         browser.close();//This will close InAppBrowser Automatically when closeUrl Started
-        this.services.crearReserva(this.usuarioId, this.info['id']).subscribe(x=>{
+        this.services.crearReserva(this.usuarioId, this.info['id'], 1).subscribe(x=>{
           this.navCtrl.push(ConfirmPage, true);
         });        
       }

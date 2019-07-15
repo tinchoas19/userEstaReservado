@@ -44,7 +44,7 @@ export class ConfirmReservaPage {
   }
 
   crearReserva(){
-    this.services.crearReserva(this.userId, this.info['id']).subscribe((x=>{
+    this.services.crearReserva(this.userId, this.info['id'], 0).subscribe((x=>{
       console.log('vueltaRecervaCreada',x);
       this.data = JSON.parse(x['_body']);
       if(this.data['data'] == 'inserted'){
