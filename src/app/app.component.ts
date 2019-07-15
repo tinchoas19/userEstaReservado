@@ -44,13 +44,15 @@ export class MyApp {
     });
   }
 
-  ngAfterViewInit() {
-    this.platform.ready().then(() => {
-      this.deeplink.routeWithNavController(this.nav, {
-        "/comprasuccess": this.rootPage = ConfirmPage,
-      });
-    });
-  }
+  // ngAfterViewInit() {
+  //   console.log("pagina a renderizar",this.nav.name);
+    
+  //   this.platform.ready().then(() => {
+  //     this.deeplink.routeWithNavController(this.nav, {
+  //       "/comprasuccess": this.rootPage = ConfirmPage,
+  //     });
+  //   });
+  // }
 
   /* ngAfterViewInit() {
     this.platform.ready().then(() => {
