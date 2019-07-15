@@ -14,7 +14,7 @@ export class IntEventoPage {
   private win: any = window;
   options: InAppBrowserOptions = {
     location: "yes", //Or 'no'
-    hidden: "yes", //Or  'yes'
+    hidden: "no", //Or  'yes'
     clearcache: "yes",
     clearsessioncache: "yes",
     zoom: "yes", //Android only ,shows browser zoom controls
