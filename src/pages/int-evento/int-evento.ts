@@ -5,6 +5,7 @@ import { ConfirmReservaPage } from '../confirm-reserva/confirm-reserva';
 import { Storage } from '@ionic/storage';
 import { PerfilPage } from '../perfil/perfil';
 import { InAppBrowser, InAppBrowserOptions, InAppBrowserEvent } from "@ionic-native/in-app-browser";
+import { ConfirmPage } from '../confirm/confirm';
 
 @Component({
   selector: 'page-int-evento',
@@ -205,9 +206,17 @@ export class IntEventoPage {
     console.log('URL_MP', this.urlMP);
     let browser = this.iab.create(this.urlMP, '_blank', this.options);
     browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
-      var closeUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/thankyou.php';
-      if (event.url == closeUrl) {
+      var okUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/thankyou.php';
+      if (event.url == okUrl) {
         browser.close();//This will close InAppBrowser Automatically when closeUrl Started
+        this.services.crearReserva(this.usuarioId, this.info['id']).subscribe(x=>{
+          this.navCtrl.push(ConfirmPage, true);
+        });        
+      }
+      var errorUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/errorpayment.php';
+      if (event.url == errorUrl) {
+        browser.close();//This will close InAppBrowser Automatically when closeUrl Started
+        this.navCtrl.push(ConfirmPage, false);
       }
     });
   }

@@ -9,12 +9,16 @@ import { NavController, NavParams, Nav, Tabs } from 'ionic-angular';
 })
 export class ConfirmPage {
   tab: any;
+  estado: boolean;
+
   constructor(
     public navCtrl: NavController,
     private nav: Nav,
     public navParams: NavParams
   ) {
     this.tab = this.navCtrl.parent;
+    this.estado = this.navParams.data;
+
   }
 
   ionViewDidLoad() {
