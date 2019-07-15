@@ -34,6 +34,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Crop } from '@ionic-native/crop';
 import { Base64 } from '@ionic-native/base64';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
     ImagePicker,
     Crop,
     Base64,
+    Deeplinks,
     InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ServicesProvider

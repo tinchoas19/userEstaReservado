@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ServicesProvider } from './../../providers/services/services';
 import { Component, ViewChild, ElementRef } from '@angular/core';
@@ -30,12 +31,14 @@ export class MapPage {
     lng:''
   }
   url:string = "http://estareservado.ctrlztest.com.ar/";
-
+  iconMarker:any;
+  private win: any = window;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private service: ServicesProvider,
     private geo: Geolocation,
+    private storage: Storage,
     private launchNavigator: LaunchNavigator
   ) {
   }
@@ -43,6 +46,10 @@ export class MapPage {
   slideChanged(){
     let currentIndex = this.slides.getActiveIndex();
     console.log('index', currentIndex);
+  }
+
+  ionViewWillEnter(){
+    this.mostrarFotoPerfil();
   }
   
   ionViewDidLoad() {
@@ -106,6 +113,7 @@ export class MapPage {
     const options = {
       center: location,
       zoom: 11,
+      styles: [{"stylers": [{ "saturation": -100 }]}],
       mapTypeId: 'terrain',
       streetViewControl: false,
       disableDefaultUI: false,
@@ -122,13 +130,38 @@ export class MapPage {
       map: this.map,
       draggable: false,
       animation: google.maps.Animation.DROP,
-      label: 'Yo!'
+      icon: {
+        url: this.iconMarker,
+        scaledSize: new google.maps.Size(40, 40)
+      }
     })
     //create map
     this.map = new google.maps.Map(mapEle,options);
     marker.setMap(this.map);
     this.map.setCenter(location);
     this.setLocation();
+  }
+
+  /* getTrustImg(){
+    console.log('imgSrc', this.imgSrc);
+    if(this.imgSrc != 'assets/imgs/perfil-none.png'){
+      let path = this.win.Ionic.WebView.convertFileSrc(this.imgSrc);
+      console.log(path);
+      return path;
+    }else{
+      return this.imgSrc;
+    }
+  } */
+
+  mostrarFotoPerfil(){
+    this.storage.get('photo_perfil').then(foto=>{
+      console.log('foto', foto);
+      if(foto != 'assets/imgs/perfil-none.png'){
+        this.iconMarker = this.win.Ionic.WebView.convertFileSrc(foto);;
+      }else{
+        this.iconMarker = "assets/imgs/perfil-none.png";
+      }
+    });
   }
 
   //infoWindowMarkers
@@ -195,10 +228,10 @@ export class MapPage {
 
   goToLocal(local){
     console.log('local', local);
-    /* let options: LaunchNavigatorOptions = {
-      start: this.location,
-      app: this.launchNavigator.APP.GOOGLE_MAPS,
-    };*/
+    let options: LaunchNavigatorOptions = {
+      start:[this.location.latitude,this.location.longitude],
+      app: this.launchNavigator.APP.USER_SELECT,
+    };
     this.launchNavigator.navigate(local['direccion']).then(success=>{
       console.log('success', success);
     }, error=>{

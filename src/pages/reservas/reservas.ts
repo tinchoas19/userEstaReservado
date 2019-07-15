@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { QrDataPage } from './../qr-data/qr-data';
 import { ServicesProvider } from './../../providers/services/services';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
   templateUrl: 'reservas.html',
 })
 export class ReservasPage {
-
+  listaFechas:any=[];
   listaFechasAnteriores: any =[];
   listaFechasVigentes: any =[];
   fechas: any =[];
@@ -26,12 +26,13 @@ export class ReservasPage {
   mostrarmsj:boolean;
   mostrarmsj1:boolean;
   url:string = "http://estareservado.ctrlztest.com.ar/"
-  
+  seMostroInfo:boolean = true;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private services: ServicesProvider,
     private toastCtrl: ToastController,
+    public alertCtrl: AlertController,
     private storage: Storage,
   ) {
   }
@@ -41,6 +42,7 @@ export class ReservasPage {
   }
 
   ionViewWillEnter(){
+    if(this.seMostroInfo){this.showAlert();}
     this.getReservas();    
   }
 
@@ -167,13 +169,15 @@ export class ReservasPage {
   }
 
   procesarListaAnteriores(){
+    this.listaFechasAnteriores = [];
     let fechaVieja = "";
     let items = {};
+    items['listaEventos'] = [];
     this.reservasAnteriores.map(x=>{
-      this.fechasAnt.push(fechaVieja);
+      console.log('e', x.fechaevento);
       if(x.fechaevento != fechaVieja){
         if(fechaVieja != ""){
-          this.listaFechasVigentes.push(items);
+          this.listaFechas.push(items);
           items = {};
           items['listaEventos'] = [];
         }
@@ -181,20 +185,39 @@ export class ReservasPage {
         fechaVieja = x.fechaevento;
         items['fecha'] = fechaVieja;
         items['listaEventos'].push(x);
+      console.log('item_vigente',items);
     })
     this.listaFechasAnteriores.push(items);    
-    console.log(this.listaFechasAnteriores);
+    console.log(this.listaFechas);
+  }
+
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: '¡No pierdas tiempo!',
+      subTitle: '¡Apreta el botón "Reservado" y asccedé al código QR de tus entradas!\n ER, simple, rápido y seguro.',
+      buttons: [
+        {
+        text: 'Ok',
+        handler: data => {
+          this.seMostroInfo = false;
+          console.log('OK clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   procesarListaVigentes(){
+    this.listaFechasVigentes = [];
     let fechaVieja = "";
     let items = {};
     items['listaEventos'] = [];
-    console.log('vigentes', this.reservasVigentes);
     this.reservasVigentes.map(x=>{
+      console.log('e', x.fechaevento);
       if(x.fechaevento != fechaVieja){
         if(fechaVieja != ""){
-          this.listaFechasVigentes.push(items);
+          this.listaFechas.push(items);
           items = {};
           items['listaEventos'] = [];
         }
@@ -205,7 +228,7 @@ export class ReservasPage {
       console.log('item_vigente',items);
     })
     this.listaFechasVigentes.push(items);    
-    console.log(this.listaFechasVigentes);
+    console.log(this.listaFechas);
   }
 
 

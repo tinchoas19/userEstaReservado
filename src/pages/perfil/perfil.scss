@@ -10,13 +10,14 @@ page-perfil {
     .img_add{
         //position:absolute;
         border-radius: 50%;
-        max-width: 50%;
+        width: 30vw;
+        height: 30vw;
         box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
         z-index: -1;
     }
     .col_add{
-        margin-top: -9% !important;
-        margin-left: -30%;
+        margin-top: -10% !important;
+        margin-left: -25%;
         z-index: 1000;
         .fab{
             background-color: #FFFFFF !important;
@@ -27,10 +28,10 @@ page-perfil {
         }
         .icon_add{
             //position:absolute;
-            margin: auto;
+            margin-left:2%;
             z-index: 100;           
             box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);    
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 600;
             color: #2f73b4 !important;
             border-radius: 50%;

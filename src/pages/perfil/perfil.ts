@@ -43,7 +43,7 @@ export class PerfilPage {
   cambioBtn1: boolean = false;
   cambioBtn2: boolean = false;
   cambioBtn3: boolean = false;
-  imgSrc: any ="../../assets/imgs/perfil-none.png";
+  imgSrc: any ="assets/imgs/perfil-none.png";
   dataUsuario: any = [];
   base64Image: any;
   perfil_photo:boolean = false;
@@ -51,6 +51,7 @@ export class PerfilPage {
   @ViewChild(Nav) nav;
   imagePath:any;
   foto_perfil:boolean =false;
+  fotoFace:boolean=false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -112,23 +113,24 @@ export class PerfilPage {
 
   ionViewWillEnter() {
     console.log('dataUser',this.navParams.data);
+    this.cambioBtn1 = this.cambioBtn2 = this.cambioBtn3 = false;
     this.mostrarFotoPerfil();
-    if (this.navParams.data['fbId']) {
-      console.log('1')
-      this.fbId = this.navParams.data['fbId'];
+    let params = this.navParams.data;
+    if(params.register){
+      console.log('0');
+      this.cambioBtn1 = true;
+      this.cambioBtn2 = this.cambioBtn3=false;
+    }else if(params.fbId){
       this.storage.set('fbId', this.fbId);
-      this.imgSrc = "https://graph.facebook.com/" + this.fbId + "/picture?type=large&width=90&height=90"
       this.userName = this.user.nombre = this.navParams.data['name'];
       this.userEmail = this.user.email = this.navParams.data['email'];
+      this.cambioBtn1 = false;
       this.cambioBtn2 = true;
-    }
-    if (!this.navParams.data.edit) {
+      this.cambioBtn3= false;
+    }else if(params.edit){
       console.log('3')
-      this.cambioBtn1 = true;
-      this.cambioBtn3 = false;
-    } else {
-      this.getDataUser();
-      console.log(this.dataUsuario.length);
+      this.getDataUser();      
+      this.cambioBtn1 = this.cambioBtn2 = false;
       this.cambioBtn3 = true;
     }
   }
@@ -150,19 +152,30 @@ export class PerfilPage {
   }
 
   mostrarFotoPerfil(){
-    this.storage.get('photo_perfil').then(foto=>{
-      if(foto){
-        this.imagePath = foto;
-      }else{
-        this.storage.get('fbId').then(id => {
-          if(id != null){
-            this.imagePath = "https://graph.facebook.com/" + id + "/picture?type=large&width=90&height=90"
-          }else{
-            this.imagePath = "../../assets/imgs/perfil-none.png";
-          }
-        })
-      }
-    });
+    this.fotoFace=false;
+    this.foto_perfil = false;
+    this.imgSrc = "";
+    this.imagePath = "";
+    if(this.navParams.data.register){
+      console.log('1');      
+      this.imagePath = "assets/imgs/perfil-none.png";
+      this.toBase64(this.imgSrc);
+    }else if(this.navParams.data.edit){
+      console.log('2');      
+      this.foto_perfil = true;
+      this.storage.get('photo_perfil').then(foto=>{
+        if(foto){
+          this.imagePath = foto;
+        }
+      })
+    }else if(this.navParams.data['fbId']){
+      console.log('3');
+      this.fotoFace = true;
+      //this.foto_perfil = false;
+      let idFace = this.navParams.data['fbId'];
+      this.imagePath = "https://graph.facebook.com/" +idFace+ "/picture?type=large&width=90&height=90";
+      this.toBase64(this.imagePath);      
+    }
   }
 
   sevePerfilconFb() {
@@ -224,7 +237,7 @@ export class PerfilPage {
       this.storage.set('dataUser', this.user);
       this.service.createUser(this.user, this.base64Image).subscribe(x => {
         console.log('dataCreateUser', JSON.parse(x['_body']));
-        this.storage.set('photo_perfil', this.imagePath);
+        this.storage.set('photo_perfil', this.base64Image);
         this.data = JSON.parse(x['_body']);
         if (this.data['data']) {
           this.storage.set('userId', this.data['data']);
@@ -277,6 +290,7 @@ export class PerfilPage {
   toBase64(filePath) {
     this.base64.encodeFile(filePath).then((base64File: string) => {
       this.base64Image = base64File;
+      this.foto_perfil = true;
     });
   }
 
@@ -309,9 +323,9 @@ export class PerfilPage {
     }
     if (this.user.telefono == "") {
       ret = false;
-      msg += "Debe completar el telefono \n";
+      msg += "Debe ingresar un número de telefono válido \n";
     }
-    if (this.user.dni == "" && this.user.dni.length == 7) {
+    if (this.user.dni == "" || this.user.dni.length != 8) {
       ret = false;
       msg += "Debes ingresar un DNI correcto \n";
     }
@@ -333,7 +347,7 @@ export class PerfilPage {
 
   toastExito() {
     let toast = this.toastCtrl.create({
-      message: 'Listo! \n Te has registrado con éxito!',
+      message: 'Listo! \n Los cambios han sido guardados',
       duration: 2000,
       position: 'top',
       cssClass: 'toastExito'
@@ -381,8 +395,9 @@ export class PerfilPage {
   }
 
   logOut() {
-    this.storage.set('userId', 0);
-    this.storage.set('dataUsuario', 0);
+    this.storage.set('userId', false);
+    this.storage.set('dataUsuario', false);
+    this.storage.set('fbId', false);
     this.menuCtrl.close();
     var nav = this.app.getRootNav();
     nav.setRoot(LoginPage);

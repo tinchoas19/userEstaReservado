@@ -47,7 +47,7 @@ export class EventosLocalPage {
   }
 
   editarPerfil(){
-    this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilPage, {edit: true});
   }
 
   getTrustImg(){
@@ -107,25 +107,25 @@ export class EventosLocalPage {
   procesarLista(){
     let fechaVieja = "";
     let items = {};
+    items['listaEventos'] = [];
     this.eventos.map(x=>{
       console.log('e', x.fechaevento);
-      if(x.fechaevento !== fechaVieja){
-        if(fechaVieja !== ""){
+      if(x.fechaevento != fechaVieja){
+        if(fechaVieja != ""){
           this.listaFechas.push(items);
+          items = {};
+          items['listaEventos'] = [];
         }
-        items = {};
+      }
         fechaVieja = x.fechaevento;
         items['fecha'] = fechaVieja;
-        items['listaEventos'] = [];
         items['listaEventos'].push(x);
-      }else{
-        items['listaEventos'].push(x);        
-      }
+      console.log('item_vigente',items);
     })
     this.listaFechas.push(items);    
     console.log(this.listaFechas);
   }
-
+   
   cortarCaracteres(frase){
     var resultado;
     if(frase.length >= 20){

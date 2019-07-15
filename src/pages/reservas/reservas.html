@@ -32,14 +32,15 @@
                     <img src="{{url+res.foto}}">
                   </ion-thumbnail>
               <ion-row>
-                <ion-col>
+                <ion-col col-7>
                   <div>{{res.nombrelugar}}</div>
                   <ion-badge color="badge">{{mostrarDia(res.fechaevento)}}</ion-badge>
-                  <p style="color: #656565; font-size: 0.75em;">Ingresá con tu código QR</p>
+                  <p style="color: #656565; font-size: 0.75em;">{{res.nombre}}</p>
                 </ion-col>
-                <ion-col style="text-align: center;">
-                  <button ion-button outline color="{{res.btnColor}}">{{res.nameBtn}}</button>
-                  <!-- <ion-icon name="calendar"></ion-icon>  <ion-icon *ngIf="mostrarIcon(reserva.estapago)" name="logo-pinterest" item-end></ion-icon> -->
+                <ion-col col-5 style="text-align: center;">
+                  <button ion-button outline icon-end color="{{res.btnColor}}">{{res.nameBtn}}
+                    <ion-icon style="font-size: 1.5rem;" color="{{res.btnColor}}" name="qr-scanner"></ion-icon>
+                  </button>
                 </ion-col> 
               </ion-row>
             </ion-item> 

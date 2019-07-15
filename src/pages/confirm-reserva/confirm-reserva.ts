@@ -48,7 +48,6 @@ export class ConfirmReservaPage {
       console.log('vueltaRecervaCreada',x);
       this.data = JSON.parse(x['_body']);
       if(this.data['data'] == 'inserted'){
-        this.toastExito();
         setTimeout(()=>{
           this.navCtrl.push(ConfirmPage);
         },1000)

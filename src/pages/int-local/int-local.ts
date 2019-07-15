@@ -54,7 +54,7 @@ export class IntLocalPage {
   }
 
   editarPerfil(){
-    this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilPage, {edit: true});
   }
 
   ionViewDidLoad() {

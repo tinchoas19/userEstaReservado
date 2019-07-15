@@ -2,15 +2,16 @@
   <ion-navbar no-border hideBackButton>
     <ion-row>
       <ion-col></ion-col>
-      <ion-col (click)="pageScroller()">
+      <ion-col>
         <ion-title text-center>
           <img style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
         </ion-title>
       </ion-col>
       <ion-col (click)="editarPerfil()">
         <ion-buttons end>
-          <!-- <img *ngIf="foto_perfil" class="imgPerfil" style="max-width: 40% !important;" [src]="imgSrc"> -->          
-          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg()">
+          <div float-right class="image-cropper">
+            <img class="imgPerfil" [src]="getTrustImg()">
+          </div>          
         </ion-buttons>
       </ion-col>
     </ion-row>

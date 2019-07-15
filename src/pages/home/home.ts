@@ -3,7 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { IntLocalPage } from './../int-local/int-local';
 import { ServicesProvider } from './../../providers/services/services';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, Events } from 'ionic-angular';
 import { Content } from 'ionic-angular';
 import { PerfilPage } from '../perfil/perfil';
 
@@ -35,15 +35,21 @@ export class HomePage {
     private geo: Geolocation,
     public loadingCtrl : LoadingController,
     private storage: Storage,
+    public events: Events,
   ) {
     //this.getLocales();
     //this.getCurrentPosition();
     this.imgSrc = 'assets/imgs/perfil-none.png';
+    events.subscribe('home:scrollToTop', (time) => {
+      console.log('home:scrollToTop', 'at', time);
+      this.pageTop.scrollToTop();
+    });
   }
 
-  pageScroller(){
+  scrollToTop(){
     //scroll to page top
-    this.pageTop.scrollToTop(500);
+    console.log('scroll');
+    this.pageTop.scrollToTop(600);
   }
 
   editarPerfil(){
@@ -69,9 +75,9 @@ export class HomePage {
       }else{
         this.storage.get('fbId').then(id => {
           if(id != null){
-            this.imgSrc = "https://graph.facebook.com/" + id + "/picture?type=large&width=90&height=90"
+            this.imgSrc = "https://graph.facebook.com/" + id + "/picture?type=large"
           }else{
-            this.imgSrc = "../../assets/imgs/perfil-none.png";
+            this.imgSrc = "assets/imgs/perfil-none.png";
           }
         })
       }
@@ -81,7 +87,7 @@ export class HomePage {
   onInput(ev:any){
     //console.log('entreeeeeeee' , ev.target.value);   
     const val = ev.target.value.trim();
-    if (val.length >= 1) {
+    if (!(val == "")) {
       console.log('val',val);
       this.localesPrev2 = this.localesPrev2.filter((item) => {
         //console.log('itemSearch', item);
@@ -119,11 +125,12 @@ export class HomePage {
     });
     loading.present();
     this.services.getLocales().subscribe(x=>{
+      this.scrollToTop();
       this.infoLocales = JSON.parse(x['_body'])['data'];
       this.localesPrev = JSON.parse(this.infoLocales)['stores'];
       this.localesPrev.map(x=>{
         if(x.horarios.length == 0){
-          x.hora_apertura = "No Abre";
+          x.hora_apertura = "No abre hoy";
         }else{
           x.horarios.map(y=>{
             if(y.dia == hoy){

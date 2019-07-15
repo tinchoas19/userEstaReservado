@@ -24,7 +24,7 @@ export class QrDataPage {
   }
 
   editarPerfil(){
-    this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilPage, {edit: true});
   }
 
   getTrustImg(){

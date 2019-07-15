@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs #mainTabs (tap)="tapped()">
   <ion-tab [root]="tab1Root" tabIcon="mascotas-luagres"></ion-tab>
   <ion-tab [root]="tab2Root" tabIcon="mascotas-mapa"></ion-tab>
   <ion-tab [root]="tab3Root" tabIcon="mascotas-reservas"></ion-tab>

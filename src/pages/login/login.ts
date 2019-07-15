@@ -157,7 +157,7 @@ export class LoginPage {
   }
 
   crearCuenta(){
-    this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilPage, {register: true});
   }
 
   recuperarPass(){

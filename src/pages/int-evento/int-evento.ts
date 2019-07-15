@@ -13,7 +13,7 @@ import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser"
 export class IntEventoPage {
   private win: any = window;
   options: InAppBrowserOptions = {
-    location: "yes", //Or 'no'
+    location: "no", //Or 'no'
     hidden: "yes", //Or  'yes'
     clearcache: "yes",
     clearsessioncache: "yes",
@@ -36,7 +36,8 @@ export class IntEventoPage {
   dataUser:any=[];
   imgSrc:any;
   url:string = "http://estareservado.ctrlztest.com.ar/"
-  
+  urlMP:any;
+  valorEntrada:any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -61,7 +62,7 @@ export class IntEventoPage {
   }
 
   editarPerfil(){
-    this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilPage, {edit: true});
   }
 
   ionViewDidLoad() {
@@ -69,7 +70,7 @@ export class IntEventoPage {
   }
 
   ionViewWillEnter(){
-    this.valor = this.info['precio'];
+    this.valorEntrada = this.info['precio'];
     this.storage.get('userId').then(x =>{
       console.log('userId', x);
       if(x){
@@ -157,58 +158,52 @@ export class IntEventoPage {
     this.navCtrl.push(ConfirmReservaPage,this.info);
   }
 
+
   // ***********************************************************
  // ---------------- CIFRADO DE CHECKOUT
  // ***********************************************************
 
- web: string = "http://ctrlztest.com.ar/test-mercadopago/?";
+  web: string = "http://ctrlztest.com.ar/estareservado/mercadopago/?";
 
- price: string = btoa("price=");
- valor: any;
- urlMP:any;
- priceAgain: string = "NgUhtRF";
+  priceParam: string = btoa("price=");
+  priceAgain: string  = "NgUhtRF";
+  idParam: string  = "ID";
+  idNumber: string  = "zLRTC";
 
- idWord: string = "ID";
- idNumber: string = "zLRTC";
+  // var emailParam = btoa("email=");
+  // let ecodeEmail = btoa("pepe@gmail.com");
+  emailParam = btoa("email=");
+  ecodeEmail = btoa(this.dataUser['email']);
 
  checkout() {
    // let money: string = btoa(JSON.stringify(this.valor));
    // let moneyAgain: string = btoa(JSON.stringify(this.valor));
-
-   let money: any = btoa(this.valor);
-   let moneyAgain: any = btoa(this.valor);
+   console.log('emial_comprador', this.dataUser['email']);
+   console.log('emial_hash', this.ecodeEmail);
+    let money: any = btoa(this.valorEntrada);
+    let moneyAgain: any = btoa(this.valorEntrada);
 
    this.urlMP=
      this.web +
-       this.price +
-       "LzY63" +
-       money +
-       "&" +
-       this.priceAgain +
-       "LzY63" +
-       moneyAgain +
-       "&" +
-       this.idWord +
-       "LzY63" +
-       this.idNumber,
-     "_blank",
-     "location=yes";
+     this.priceParam +
+     "LzY63" +
+     money +
+     "&" +
+     this.priceAgain +
+     "LzY63" +
+     moneyAgain +
+     "&" +
+     this.idParam +
+     "LzY63" +
+     this.idNumber +
+     "&" +
+     this.emailParam +
+     "LzY63" +
+     this.dataUser['email'];
 
      let target = "_blank";
-     this.iab.create(this.urlMP, target, this.options);
+     console.log('URL_MP', this.urlMP);
+     this.iab.create(this.urlMP,'_blank',{location:'no'});
  }
-
- /* public openWithSystemBrowser(url: string) {
-   let target = "_system";
-   this.iab.create(url, target, this.options);
- }
- public openWithInAppBrowser(url: string) {
-   let target = "_blank";
-   this.iab.create(url, target, this.options);
- }
- public openWithCordovaBrowser(url: string) {
-   let target = "_self";
-   this.iab.create(url, target, this.options);
- } */
 
 }

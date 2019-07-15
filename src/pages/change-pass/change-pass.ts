@@ -28,18 +28,18 @@ export class ChangePassPage {
 
   recuperarPass(email){
     console.log('email', email);
-    if (!this.emailIsValid(this.email)) {
+    if (this.emailIsValid(this.email)) {
       this.services.recuperarPass(email).subscribe(x=>{
         console.log('data',x);
         if(x['status'] === 200){
           let msg = 'Listo! \n Te enviamos un email a tu casilla.'
-          this.presentToast(msg)
+          this.presentToasteEx(msg)
           setTimeout(()=>{
             this.navCtrl.pop();
           },2000)
         }else{
           let msg = "Oh no! \n Por favor verifica que sea un email válido, o no estas registrado."
-          this.presentToast(msg);
+          this.presentToasteError(msg);
           setTimeout(()=>{
             this.navCtrl.pop();
           },2000)
@@ -47,11 +47,23 @@ export class ChangePassPage {
       })
     }else{
       let msg = "Oh no! \n Por favor verifica que sea un email válido, o no estas registrado."
-      this.presentToast(msg);
+      this.presentToasteError(msg);
     }
   }
 
-  async presentToast(msg) {
+  async presentToasteError(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration:2000,
+      showCloseButton: true,
+      position: 'top',
+      cssClass: 'toastError',
+      closeButtonText: 'x'
+    });
+    toast.present();
+  }
+
+  async presentToasteEx(msg) {
     const toast = await this.toastController.create({
       message: msg,
       duration:2000,
