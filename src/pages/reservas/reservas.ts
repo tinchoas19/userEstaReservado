@@ -194,7 +194,10 @@ export class ReservasPage {
   showAlert() {
     const alert = this.alertCtrl.create({
       title: '¡No pierdas tiempo!',
-      subTitle: '¡Apreta el botón "Reservado" y asccedé al código QR de tus entradas!\n ER, simple, rápido y seguro.',
+      message: `
+              <p>¡Apreta el botón "Reservado" y accedé al código QR de tus entradas!</p>
+              <br>
+              <p>ER, simple, rápido y seguro.</p> `,
       buttons: [
         {
         text: 'Ok',

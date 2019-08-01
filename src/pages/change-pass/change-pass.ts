@@ -31,19 +31,26 @@ export class ChangePassPage {
     if (this.emailIsValid(this.email)) {
       this.services.recuperarPass(email).subscribe(x=>{
         console.log('data',x);
-        if(x['status'] === 200){
+        let data = JSON.parse(x['_body']);
+        if(data['status'] == 200){
           let msg = 'Listo! \n Te enviamos un email a tu casilla.'
           this.presentToasteEx(msg)
           setTimeout(()=>{
             this.navCtrl.pop();
-          },2000)
+          },1000)
         }else{
           let msg = "Oh no! \n Por favor verifica que sea un email válido, o no estas registrado."
           this.presentToasteError(msg);
           setTimeout(()=>{
             this.navCtrl.pop();
-          },2000)
+          },1000)
         }
+      }, onerror=>{
+        let msg = "Oh no! \n Por favor verifica que sea un email válido, o no estas registrado."
+        this.presentToasteError(msg);
+        setTimeout(()=>{
+          this.navCtrl.pop();
+        },1000)
       })
     }else{
       let msg = "Oh no! \n Por favor verifica que sea un email válido, o no estas registrado."

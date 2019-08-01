@@ -219,12 +219,18 @@ export class ServicesProvider {
   }
 
   recuperarPass(email){
+    let url = "http://estareservado.ctrlztest.com.ar/recuperarpass.php";
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
     
-    const requestOptions = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers, withCredentials: true });
 
-    return this.http.post('http://estareservado.ctrlztest.com.ar/recuperarpass.php?email='+email,{},requestOptions).pipe(
+    const body = JSON.stringify({
+      email: email
+    })
+
+    console.log('body', body);
+    return this.http.post(url, body, options).pipe(
       tap(x=>{
         console.log('dataUser', x);
       })
