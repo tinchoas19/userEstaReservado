@@ -21,7 +21,7 @@ export class EventosLocalPage {
   listaFechas:any = [];
   mostrarmsj:boolean = false;
   imgSrc:any;
-  url:string = "http://estareservado.ctrlztest.com.ar/";
+  url:string = "https://ctrlztest.com.ar/estareservado/";
   
   constructor(
     public navCtrl: NavController, 
@@ -50,28 +50,16 @@ export class EventosLocalPage {
     this.navCtrl.push(PerfilPage, {edit: true});
   }
 
-  getTrustImg(){
-    if(this.imgSrc != 'assets/imgs/perfil-none.png'){
-      let path = this.win.Ionic.WebView.convertFileSrc(this.imgSrc);
-      console.log(path);
-      return path;
-    }else{
-      return this.imgSrc;
-    }
-  }
-
   mostrarFotoPerfil(){
-    this.storage.get('photo_perfil').then(foto=>{
-      if(foto){
-        this.imgSrc = foto;
+    this.storage.get('datauser').then(user=>{
+      console.log('foto', user);
+      let usuario = user[0];
+      if(usuario.foto != ""){
+        this.imgSrc = 'https://ctrlztest.com.ar/estareservado/'+usuario.foto;
+      }else if(usuario.facabooid != null){
+        this.imgSrc = "https://graph.facebook.com/" + usuario.facabooid + "/picture?type=large"
       }else{
-        this.storage.get('fbId').then(id => {
-          if(id != null){
-            this.imgSrc = "https://graph.facebook.com/" + id + "/picture?type=large&width=90&height=90"
-          }else{
-            this.imgSrc = "../../assets/imgs/perfil-none.png";
-          }
-        })
+        this.imgSrc = "assets/imgs/perfil-none.png";
       }
     });
   }

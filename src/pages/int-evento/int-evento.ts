@@ -36,7 +36,7 @@ export class IntEventoPage {
   info: any = [];
   dataUser: any = [];
   imgSrc: any;
-  url: string = "http://estareservado.ctrlztest.com.ar/"
+  url: string = "https://ctrlztest.com.ar/estareservado/"
   urlMP: any;
   valorEntrada: any;
   constructor(
@@ -49,6 +49,7 @@ export class IntEventoPage {
   ) {
     this.nombreLocal = this.navParams.data.localName;
     this.info = this.navParams.data.event;
+    this.valorEntrada = this.info.precio;
     console.log('info', this.info);
   }
 
@@ -71,40 +72,33 @@ export class IntEventoPage {
   }
 
   ionViewWillEnter() {
-    this.valorEntrada = this.info['precio'];
-    this.storage.get('userId').then(x => {
-      console.log('userId', x);
-      if (x) {
-        this.usuarioId = x;
-      }
-      this.mostrarFotoPerfil();
-      this.getDataUser();
-    })
+    this.mostrarFotoPerfil();
+
   }
 
   mostrarFotoPerfil() {
-    this.storage.get('photo_perfil').then(foto => {
-      if (foto) {
-        this.imgSrc = foto;
+    this.storage.get('datauser').then(user => {
+      console.log('foto', user);
+      let usuario = user[0];
+      this.usuarioId = usuario.usuarioid;
+      this.getDataUser(this.usuarioId);
+      if (usuario.foto != "") {
+        this.imgSrc = 'https://ctrlztest.com.ar/estareservado/' + usuario.foto;
+      } else if (usuario.facabooid != null) {
+        this.imgSrc = "https://graph.facebook.com/" + usuario.facabooid + "/picture?type=large"
       } else {
-        this.storage.get('fbId').then(id => {
-          if (id != null) {
-            this.imgSrc = "https://graph.facebook.com/" + id + "/picture?type=large&width=90&height=90"
-          } else {
-            this.imgSrc = "../../assets/imgs/perfil-none.png";
-          }
-        })
+        this.imgSrc = "assets/imgs/perfil-none.png";
       }
     });
   }
 
-  getDataUser() {
+  getDataUser(id) {
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: 'Espere por favor...'
     });
     loading.present();
-    this.services.getDataUser(this.usuarioId).subscribe(x => {
+    this.services.getDataUser(id).subscribe(x => {
       this.dataUser = JSON.parse(x['_body'])['data'];
       loading.dismiss();
       console.log('xxxx', this.dataUser);
@@ -164,7 +158,7 @@ export class IntEventoPage {
   // ---------------- CIFRADO DE CHECKOUT
   // ***********************************************************
 
-  web: string = "http://ctrlztest.com.ar/estareservado/mercadopago/?";
+  web: string = "https://ctrlztest.com.ar/estareservado/mercadopago/?";
 
   priceParam: string = btoa("price=");
   priceAgain: string = "NgUhtRF";
@@ -183,6 +177,9 @@ export class IntEventoPage {
     console.log('emial_hash', this.ecodeEmail);
     let money: any = btoa(this.valorEntrada);
     let moneyAgain: any = btoa(this.valorEntrada);
+    console.log('this.valorEntrada', this.valorEntrada);
+    console.log('money', money);
+    console.log('moneyAgain', moneyAgain);
 
     this.urlMP =
       this.web +
@@ -200,20 +197,20 @@ export class IntEventoPage {
       "&" +
       this.emailParam +
       "LzY63" +
-      this.dataUser['email'];
+      this.ecodeEmail;
 
     let target = "_blank";
     console.log('URL_MP', this.urlMP);
     let browser = this.iab.create(this.urlMP, '_blank', this.options);
     browser.on('loadstart').subscribe((event: InAppBrowserEvent) => {
-      var okUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/thankyou.php';
+      var okUrl = 'https://ctrlztest.com.ar/estareservado/mercadopago/thankyou.php';
       if (event.url == okUrl) {
         browser.close();//This will close InAppBrowser Automatically when closeUrl Started
-        this.services.crearReserva(this.usuarioId, this.info['id'], 1).subscribe(x=>{
+        this.services.crearReserva(this.usuarioId, this.info['id'], 1).subscribe(x => {
           this.navCtrl.push(ConfirmPage, true);
-        });        
+        });
       }
-      var errorUrl = 'http://ctrlztest.com.ar/estareservado/mercadopago/errorpayment.php';
+      var errorUrl = 'https://ctrlztest.com.ar/estareservado/mercadopago/errorpayment.php';
       if (event.url == errorUrl) {
         browser.close();//This will close InAppBrowser Automatically when closeUrl Started
         this.navCtrl.push(ConfirmPage, false);

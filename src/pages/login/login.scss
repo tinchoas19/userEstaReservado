@@ -1,6 +1,6 @@
 page-login {
     ion-content {
-        background: url("../../assets/imgs/1-login/bg.jpg");
+        background: url("../assets/imgs/1-login/bg.jpg");
         background-size: cover; 
         background-position: center; 
     }
@@ -33,10 +33,10 @@ page-login {
         }
         // custom icons
         &[class*="appname-username"] {
-            mask-image: url("../../assets/imgs/1-login/user.png");
+            mask-image: url("../assets/imgs/1-login/user.png");
         }
         &[class*="appname-password"] {
-            mask-image: url("../../assets/imgs/1-login/pass.png");
+            mask-image: url("../assets/imgs/1-login/pass.png");
         }
     }
     .placeholder-text{

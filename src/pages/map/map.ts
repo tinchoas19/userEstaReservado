@@ -30,7 +30,7 @@ export class MapPage {
     lat:"",
     lng:''
   }
-  url:string = "http://estareservado.ctrlztest.com.ar/";
+  url:string = "https://ctrlztest.com.ar/estareservado/";
   iconMarker:any;
   private win: any = window;
   constructor(
@@ -154,12 +154,14 @@ export class MapPage {
   } */
 
   mostrarFotoPerfil(){
-    this.storage.get('photo_perfil').then(foto=>{
-      console.log('foto', foto);
-      if(foto != 'assets/imgs/perfil-none.png'){
-        this.iconMarker = this.win.Ionic.WebView.convertFileSrc(foto);;
+    this.storage.get('usuario').then(user=>{
+      console.log('foto', user.foto);
+      if(user.foto != null){
+        this.iconMarker = 'https://ctrlztest.com.ar/estareservado/'+user.foto;
+      }else if(user.facebooif != null){
+        this.iconMarker = "https://graph.facebook.com/" +user.facebooif+ "/picture?type=large&width=90&height=90";
       }else{
-        this.iconMarker = "assets/imgs/perfil-none.png";
+        this.iconMarker = 'assets/imgs/perfil-none.png';
       }
     });
   }

@@ -38,14 +38,18 @@ export class LoginPage {
 
   login(){
     if(this.validacion()){
+      const loader = this.loadingCtrl.create({
+        content: "Espere por favor...",
+      });
+      loader.present();
       this.service.validarUser(this.user).subscribe(x=>{
         console.log('vuetaUser',x);
         this.data = JSON.parse(x['_body']);
-        if(this.data['data']['usuarioid'] !== 0){
+        if(this.data['data']['usuarioid'] != 0){
           //guarda usuarioid
           console.log('login',this.data['data']);
-          this.storage.set('userId',this.data['data']['usuarioid']);
-          this.storage.set('photo_perfil', "http://estareservado.ctrlztest.com.ar/"+this.data['data']['foto']);                    
+          this.storage.set('datauser',this.data['data']);
+          loader.dismiss();          
           setTimeout(()=>{
             this.navCtrl.setRoot(InfoSlidePage);
             //this.toastExito()

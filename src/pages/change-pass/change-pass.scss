@@ -1,6 +1,6 @@
 page-change-pass {
     ion-content{
-        background-image: url("../../assets/imgs/2-registrar/bg.jpg");
+        background-image: url("../assets/imgs/2-registrar/bg.jpg");
         background-size: cover;
         background-position: center;
         display: flex;
@@ -29,7 +29,7 @@ page-change-pass {
         }
         // custom icons
         &[class*="appname-username"] {
-            mask-image: url("../../assets/imgs/1-login/user.png");
+            mask-image: url("../assets/imgs/1-login/user.png");
         }
     }
     .placeholder-text{

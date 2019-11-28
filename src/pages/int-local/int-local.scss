@@ -20,6 +20,19 @@ page-int-local {
         width: 100% !important;
         background-color: #009cab;
     }
+    .image-cropper {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        .imgPerfil{
+            display: inline;
+            margin: 0 auto;
+            max-width: 100%;
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75)
+        }
+    }
     .imgPerfil{
         border-radius: 50%;
     }

@@ -1,6 +1,6 @@
 page-perfil {
     ion-content{
-        background-image: url("../../assets/imgs/2-registrar/bg.jpg");
+        background-image: url("../assets/imgs/2-registrar/bg.jpg");
         background-size: cover;
         background-position: center;
         display: flex;
@@ -71,16 +71,16 @@ page-perfil {
         }
         // custom icons
         &[class*="appname-username"] {
-            mask-image: url("../../assets/imgs/2-registrar/name.png");
+            mask-image: url("../assets/imgs/2-registrar/name.png");
         }
         &[class*="appname-email"] {
-            mask-image: url("../../assets/imgs/2-registrar/mail.png");
+            mask-image: url("../assets/imgs/2-registrar/mail.png");
         }
         &[class*="appname-tel"] {
-            mask-image: url("../../assets/imgs/2-registrar/tel.png");
+            mask-image: url("../assets/imgs/2-registrar/tel.png");
         }
         &[class*="appname-dni"] {
-            mask-image: url("../../assets/imgs/2-registrar/dni.png");
+            mask-image: url("../assets/imgs/2-registrar/dni.png");
         }
     }
     .item_perfil{

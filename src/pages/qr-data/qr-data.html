@@ -8,12 +8,14 @@
       </ion-col>
       <ion-col>
         <ion-title text-center>
-          <img style="max-width: 40% !important;" src="../../assets/imgs/icono-er.svg">
+          <img style="max-width: 40% !important;" src="assets/imgs/icono-er.svg">
         </ion-title>
       </ion-col>
       <ion-col (click)="editarPerfil()">
         <ion-buttons end>
-          <img class="imgPerfil" style="max-width: 40% !important;" [src]="getTrustImg(imgSrc)">
+          <div float-right class="image-cropper">
+            <img class="imgPerfil" [src]="imgSrc">
+          </div>
         </ion-buttons>
       </ion-col>
     </ion-row>

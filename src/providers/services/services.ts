@@ -18,8 +18,8 @@ export class ServicesProvider {
     console.log('Hello ServicesProvider Provider');
   }
 
-  createUserFB(user,facebookid, foto){
-    let url = "http://estareservado.ctrlztest.com.ar/crearusuario.php";
+  createUserFB(user,facebookid){
+    let url = "https://ctrlztest.com.ar/estareservado/crearusuario.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -36,7 +36,6 @@ export class ServicesProvider {
       password: user.pass,
       rolid: 1,
       facebookid: facebookid,
-      foto: foto
     })
 
     return this.http.post(url, body, options).pipe(
@@ -48,7 +47,7 @@ export class ServicesProvider {
 
   createUser(user, foto){
     console.log('userBACK', user.nombre);
-    let url = "http://estareservado.ctrlztest.com.ar/crearusuario.php";
+    let url = "https://ctrlztest.com.ar/estareservado/crearusuario.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -71,14 +70,14 @@ export class ServicesProvider {
     console.log('body', body);
     return this.http.post(url, body, options).pipe(
       tap(x=>{
-        console.log('dataLocales', x);
+        console.log('crearusuario', x);
       })
     )
   }
 
   updateUser(id,user,foto){
     console.log('userBACK', id);
-    let url = "http://estareservado.ctrlztest.com.ar/actualizarusuario.php";
+    let url = "https://ctrlztest.com.ar/estareservado/actualizarusuario.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -108,7 +107,7 @@ export class ServicesProvider {
 
   updateImage(id,foto){
     console.log('userBACK', id);
-    let url = "http://estareservado.ctrlztest.com.ar/actualizarimagen.php";
+    let url = "https://ctrlztest.com.ar/estareservado/actualizarimagen.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -129,7 +128,7 @@ export class ServicesProvider {
   }
 
   validarUser(user){
-    let url = "http://estareservado.ctrlztest.com.ar/validarusuarioadmin.php?usuario="+user.usuario+"&contrasenia="+user.password;
+    let url = "https://ctrlztest.com.ar/estareservado/validarusuarioadmin.php?usuario="+user.usuario+"&contrasenia="+user.password;
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -147,7 +146,7 @@ export class ServicesProvider {
   }
 
   getLocales(): Observable<any>{
-    let url = "http://estareservado.ctrlztest.com.ar/traerlocales.php";
+    let url = "https://ctrlztest.com.ar/estareservado/traerlocales.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -162,7 +161,7 @@ export class ServicesProvider {
   }
 
   getEventosLocal(id): Observable<any>{
-    let url = "http://estareservado.ctrlztest.com.ar/traereventosxlocal.php?localid="+id;
+    let url = "https://ctrlztest.com.ar/estareservado/traereventosxlocal.php?localid="+id;
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -182,7 +181,7 @@ export class ServicesProvider {
     
     const requestOptions = new RequestOptions({ headers: headers });
 
-    return this.http.post('http://estareservado.ctrlztest.com.ar/traerperfilusuario.php?userid='+userId,{},requestOptions).pipe(
+    return this.http.post('https://ctrlztest.com.ar/estareservado/traerperfilusuario.php?userid='+userId,{},requestOptions).pipe(
       tap(x=>{
         console.log('dataUser', x);
       })
@@ -195,7 +194,7 @@ export class ServicesProvider {
     
     const requestOptions = new RequestOptions({ headers: headers });
 
-    return this.http.post('http://estareservado.ctrlztest.com.ar/traermisreservas.php?usuarioid='+userId,{},requestOptions).pipe(
+    return this.http.post('https://ctrlztest.com.ar/estareservado/traermisreservas.php?usuarioid='+userId,{},requestOptions).pipe(
       tap(x=>{
         console.log('dataUser', JSON.parse(x['_body']));
       })
@@ -203,7 +202,7 @@ export class ServicesProvider {
   }
 
   validarFbId(facebookid){
-    let url = "http://estareservado.ctrlztest.com.ar/validarusuario.php?facebookid="+facebookid;
+    let url = "https://ctrlztest.com.ar/estareservado/validarusuario.php?facebookid="+facebookid;
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
@@ -219,7 +218,7 @@ export class ServicesProvider {
   }
 
   recuperarPass(email){
-    let url = "http://estareservado.ctrlztest.com.ar/recuperarpass.php";
+    let url = "https://ctrlztest.com.ar/estareservado/recuperarpass.php";
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');
     
@@ -238,7 +237,7 @@ export class ServicesProvider {
   }
 
   crearReserva(userId, eventoId,pago){
-    let url = "http://estareservado.ctrlztest.com.ar/crearreserva.php";
+    let url = "https://ctrlztest.com.ar/estareservado/crearreserva.php";
     
     var headers = new Headers();
     headers.append('content-type', 'application/x-www-form-urlencoded');

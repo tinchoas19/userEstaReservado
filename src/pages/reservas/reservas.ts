@@ -25,7 +25,7 @@ export class ReservasPage {
   reservasAnteriores:any=[];
   mostrarmsj:boolean;
   mostrarmsj1:boolean;
-  url:string = "http://estareservado.ctrlztest.com.ar/"
+  url:string = "https://ctrlztest.com.ar/estareservado/"
   seMostroInfo:boolean = true;
   constructor(
     public navCtrl: NavController, 
@@ -57,8 +57,9 @@ export class ReservasPage {
     this.reservasVigentes = [];
     this.listaFechasAnteriores = [];
     this.listaFechasVigentes = [];
-    this.storage.get('userId').then(x=>{
-      this.services.getReservasUser(x).subscribe(x=>{
+    this.storage.get('datauser').then(x=>{
+      let usuario = x[0];
+      this.services.getReservasUser(usuario.usuarioid).subscribe(x=>{
         this.data = JSON.parse(x['_body'])['data'];
         this.reservas = JSON.parse(this.data)['reserva']
         console.log('reservas', this.reservas);

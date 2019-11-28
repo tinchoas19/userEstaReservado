@@ -5,11 +5,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-import { InfoSlidePage } from '../pages/info-slide/info-slide';
 import { Storage } from '@ionic/storage';
-import { ConfirmPage } from '../pages/confirm/confirm';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +29,7 @@ export class MyApp {
       statusBar.backgroundColorByHexString('#259ea6')
       //statusBar.styleDefault();
       splashScreen.hide();
-      storage.get('dataUsuario').then((val)=>{
+      storage.get('datauser').then((val)=>{
         console.log('componentApp', val);
         if(val){
           this.rootPage = TabsPage
@@ -43,43 +40,5 @@ export class MyApp {
       })
     });
   }
-
-  // ngAfterViewInit() {
-  //   console.log("pagina a renderizar",this.nav.name);
-    
-  //   this.platform.ready().then(() => {
-  //     this.deeplink.routeWithNavController(this.nav, {
-  //       "/comprasuccess": this.rootPage = ConfirmPage,
-  //     });
-  //   });
-  // }
-
-  /* ngAfterViewInit() {
-    this.platform.ready().then(() => {
-      this.Deeplinks
-        .rourouteWithNavControllerte({
-          "/comprasuccess": ConfirmPage,
-        }
-          //   "/bought": BoughtPage,
-          //   '/products/:productId': ProductPage
-        )
-        // Desde la web se envia a: goopzer://redefinepass?usuarioid=marta@ctrlz.com.ar
- 
-        // Desde la web se envia a: goopzer://redefinepass?usuarioid=marta@ctrlz.com.ar&?password=12345678
- 
-        .subscribe(
-          match => {
-            //  match.$route // - the route we matched, which is the matched entry from the arguments to route()
-            // match.$args - the args passed in the link
-            // match.$link - the full link data
-            console.log("Successfully matched route", match);
-          },
-          nomatch => {
-            // nomatch.$link - the full link data
-            console.error("Got a deeplink that didn't match", nomatch);
-          }
-        );
-    });
-  } */
 }
 

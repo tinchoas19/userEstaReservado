@@ -27,7 +27,7 @@ export class HomePage {
   };
   imgSrc:any;
   hora_apertura:any;
-  url:string = "http://estareservado.ctrlztest.com.ar/"
+  url:string = "https://ctrlztest.com.ar/estareservado/"
 
   constructor(
     public navCtrl: NavController,
@@ -39,7 +39,6 @@ export class HomePage {
   ) {
     //this.getLocales();
     //this.getCurrentPosition();
-    this.imgSrc = 'assets/imgs/perfil-none.png';
     events.subscribe('home:scrollToTop', (time) => {
       console.log('home:scrollToTop', 'at', time);
       this.pageTop.scrollToTop();
@@ -58,7 +57,7 @@ export class HomePage {
 
   getTrustImg(){
     console.log('imgSrc', this.imgSrc);
-    if(this.imgSrc != 'assets/imgs/perfil-none.png'){
+    if(this.imgSrc != null){
       let path = this.win.Ionic.WebView.convertFileSrc(this.imgSrc);
       console.log(path);
       return path;
@@ -68,18 +67,15 @@ export class HomePage {
   }
 
   mostrarFotoPerfil(){
-    this.storage.get('photo_perfil').then(foto=>{
-      console.log('foto', foto);
-      if(foto){
-        this.imgSrc = foto;
+    this.storage.get('datauser').then(user=>{
+      console.log('foto', user);
+      let usuario = user[0];
+      if(usuario.foto != ""){
+        this.imgSrc = 'https://ctrlztest.com.ar/estareservado/'+usuario.foto;
+      }else if(usuario.facabooid != null){
+        this.imgSrc = "https://graph.facebook.com/" + usuario.facabooid + "/picture?type=large"
       }else{
-        this.storage.get('fbId').then(id => {
-          if(id != null){
-            this.imgSrc = "https://graph.facebook.com/" + id + "/picture?type=large"
-          }else{
-            this.imgSrc = "assets/imgs/perfil-none.png";
-          }
-        })
+        this.imgSrc = "assets/imgs/perfil-none.png";
       }
     });
   }

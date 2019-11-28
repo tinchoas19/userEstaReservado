@@ -4,9 +4,12 @@
 </ion-header>
 <ion-content>
   <ion-row *ngIf="!fotoFace" style="margin-top: 7%;" justify-content-center>
-    <ion-col col-4 no-padding>
-      <img *ngIf="!foto_perfil" class="img_add" src="assets/imgs/perfil-none.png">
-      <img *ngIf="foto_perfil" class="img_add" [src]="getTrustImg(imagePath)">
+    <ion-col col-4 no-padding *ngIf="!foto_perfil">
+      <img *ngIf="!imagePath" class="img_add" src="assets/imgs/perfil-none.png">
+      <img *ngIf="imagePath" class="img_add"  [src]="imagePath"/>
+    </ion-col>
+    <ion-col col-4 no-padding *ngIf="foto_perfil">
+      <img *ngIf="imagePath" class="img_add"  [src]="imagePath"/>
     </ion-col>
     <ion-col style="padding-right: 5px!important;" col-8 no-padding>
       <h4 style="font-size: 1.1em;">{{userName}} {{apellido}}</h4>
@@ -18,7 +21,7 @@
   </ion-row>
   <ion-row *ngIf="fotoFace" style="margin-top: 7%;" justify-content-center>
     <ion-col col-4 no-padding>
-      <img class="img_add" [src]="getTrustImg(imagePath)">
+      <img class="img_add" [src]="imagePath">
     </ion-col>
     <ion-col style="padding-right: 5px!important;" col-8 no-padding>
       <h4 style="font-size: 1.1em;">{{userName}} {{apellido}}</h4>

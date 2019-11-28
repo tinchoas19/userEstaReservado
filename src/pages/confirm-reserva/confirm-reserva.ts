@@ -2,7 +2,7 @@ import { Storage } from '@ionic/storage';
 import { ServicesProvider } from './../../providers/services/services';
 import { ConfirmPage } from './../confirm/confirm';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 
 
 @Component({
@@ -15,12 +15,13 @@ export class ConfirmReservaPage {
   userId:any;
   data:any=[];
   msg:any;
-  url:string = "http://estareservado.ctrlztest.com.ar/"
+  url:string = "https://ctrlztest.com.ar/estareservado/"
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public toastCtrl: ToastController,  
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,  
     private services: ServicesProvider,
     private storage: Storage,
   ) {
@@ -34,8 +35,9 @@ export class ConfirmReservaPage {
 
   ionViewWillEnter(){
     this.info = this.navParams.data;
-    this.storage.get('userId').then(x=>{
-      this.userId = x;
+    this.storage.get('datauser').then(x=>{
+      let usuario = x[0];
+      this.userId = usuario.usuarioid;
     })
   }
 
@@ -44,10 +46,16 @@ export class ConfirmReservaPage {
   }
 
   crearReserva(){
+    const loader = this.loadingCtrl.create({
+      content: "Espere por favor...",
+    });
+    loader.present();
     this.services.crearReserva(this.userId, this.info['id'], 0).subscribe((x=>{
       console.log('vueltaRecervaCreada',x);
       this.data = JSON.parse(x['_body']);
       if(this.data['data'] == 'inserted'){
+        loader.dismiss();
+        this.toastExito();
         setTimeout(()=>{
           this.navCtrl.push(ConfirmPage);
         },1000)
